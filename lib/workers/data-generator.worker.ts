@@ -9,7 +9,8 @@ self.onmessage = (e: MessageEvent) => {
   
   try {
     const totalChunks = Math.ceil(count / CHUNK_SIZE);
-    const usedValues = new Set();
+    const usedValues: Set<number> = new Set<number>();
+    // const usedValues = new Set();
     let processedCount = 0;
 
     for (let chunk = 0; chunk < totalChunks; chunk++) {
@@ -36,7 +37,7 @@ self.onmessage = (e: MessageEvent) => {
         isLastChunk: processedCount >= count
       });
     }
-  } catch (error) {
+  } catch (error:any) {
     self.postMessage({ type: 'error', error: error.message });
   }
 };
