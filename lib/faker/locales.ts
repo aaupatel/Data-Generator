@@ -2,6 +2,7 @@ import { Language } from '../types';
 
 export const prefixByLocale: Record<Language, string[]> = {
   en: ['Mr.', 'Mrs.', 'Ms.', 'Dr.', 'Prof.'],
+  gb: ['Mr.', 'Mrs.', 'Ms.', 'Dr.', 'Prof.'],
   ar: ['السيد', 'السيدة', 'الآنسة', 'الدكتور', 'الأستاذ'],
   zh_CN: ['先生', '女士', '小姐', '博士', '教授'],
   de: ['Herr', 'Frau', 'Dr.', 'Prof.'],
@@ -22,6 +23,7 @@ export const chineseNames = {
 
 export const middleNamesByLocale: Record<Language, string[]> = {
   en: ['James', 'Marie', 'Elizabeth', 'John', 'Anne', 'Robert', 'Lee', 'Michael', 'Rose', 'William'],
+  gb: ['James', 'Marie', 'Elizabeth', 'John', 'Anne', 'Robert', 'Lee', 'Michael', 'Rose', 'William'],
   es: ['María', 'José', 'Antonio', 'Juan', 'Luis', 'Carlos', 'Miguel', 'Francisco', 'Pedro', 'Manuel'],
   fr: ['Marie', 'Pierre', 'Jean', 'Louis', 'François', 'Henri', 'Claude', 'Michel', 'André', 'Paul'],
   de: ['Maria', 'Josef', 'Peter', 'Hans', 'Wolfgang', 'Karl', 'Heinrich', 'Thomas', 'Michael', 'Andreas'],
