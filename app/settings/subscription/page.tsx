@@ -182,7 +182,7 @@ export default function SubscriptionPage() {
                     </li>
                   ))}
                 </ul>
-                {session.user.subscription === plan.name.toLowerCase() ? (
+                {(session.user as any).subscription === plan.name.toLowerCase() ? (
                   <Button className="w-full" disabled>
                     Current Plan
                   </Button>
