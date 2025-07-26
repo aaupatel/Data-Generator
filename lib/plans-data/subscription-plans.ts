@@ -13,7 +13,7 @@ export const plans = [
     },
     {
         name: "Silver",
-        price: "₹4,000/year",
+        price: "₹3,000/year",
         description: "Great for regular users",
         features: [
             "Up to 300,000 rows per file",
@@ -26,10 +26,10 @@ export const plans = [
     },
     {
         name: "Gold",
-        price: "₹30,000/year",
+        price: "₹9,000/year",
         description: "For power users",
         features: [
-            "Up to 10M rows per file",
+            "Up to 8M rows per file",
             "Multiple international languages",
             "Multiple output formats",
             "No daily limit on downloads",

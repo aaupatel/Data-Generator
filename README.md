@@ -13,7 +13,7 @@
 - 🔧 Customizable field selection
 - 💾 Download large datasets based on subscription
 - 🔐 Secure authentication (with JWT & NextAuth)
-- 💳 Stripe-powered subscription billing (Free, Silver, Gold)
+- 💳 Razorpay-powered subscription billing (Free, Silver, Gold)
 - 📈 Clean, responsive UI with TailwindCSS + Radix UI
 - 📅 Daily limits enforced with plan-based restrictions
 
@@ -46,11 +46,31 @@ npm install
 ### 3. Set up environment variables
 >Create a .env file and include:
 ```bash
-DATABASE_URL=your_mongodb_uri
-NEXTAUTH_SECRET=your_secret
 NEXTAUTH_URL=http://localhost:3000
-STRIPE_SECRET_KEY=your_stripe_secret_key
-STRIPE_PUBLIC_KEY=your_stripe_public_key
+NEXTAUTH_SECRET=your-secret-key-here
+
+GITHUB_ID=your-github-id
+GITHUB_SECRET=your-github-secret
+
+GOOGLE_ID=your-google-id
+GOOGLE_SECRET=your-google-secret
+
+MONGODB_URI=mongodb://localhost:27017
+MONGODB_DB=database-data-generator
+
+RAZORPAY_KEY_ID=your-razorpay-key-id
+RAZORPAY_KEY_SECRET=your-razorpay-secret
+NEXT_PUBLIC_RAZORPAY_KEY_ID=your-razorpay-key-id
+
+STRIPE_SECRET_KEY=your-stripe-secret-key
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your-stripe-publishable-key
+
+EMAIL_USER=your-email@example.com
+EMAIL_PASS=your-email-app-password
+
+JWT_SECRET=your-jwt-secret
+
+NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
 ### 4. Run the development server

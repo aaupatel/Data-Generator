@@ -47,7 +47,7 @@ export function ConfigurationCard({
   const [customSeparator, setCustomSeparator] = useState(false);
   const maxRecords =
     subscription === "gold"
-      ? 10000000
+      ? 8000000
       : subscription === "silver"
       ? 300000
       : 2000;

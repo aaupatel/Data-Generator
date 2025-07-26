@@ -31,7 +31,7 @@ export async function POST(request: Request) {
 
   const { plan } = await request.json();
 
-  const amount = plan === 'silver' ? 4000 : plan === 'gold' ? 30000 : 0;
+  const amount = plan === 'silver' ? 3000 : plan === 'gold' ? 9000 : 0;
   if (amount === 0) {
     return NextResponse.json({ error: 'Invalid plan' }, { status: 400 });
   }

@@ -1,6 +1,6 @@
 import { DatabaseType, FieldConfig, GeneratedData, Language } from "./types";
 
-const MAX_RECORDS = 10000000;
+const MAX_RECORDS = 8000000;
 
 function validateConfig(count: number, enabledFields: FieldConfig[]) {
   if (count <= 0) {

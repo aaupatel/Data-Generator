@@ -90,7 +90,7 @@ export default function ProfilePage() {
                   </div>
                   <p className="mt-2">
                     {user.subscription.plan === "gold"
-                      ? "10M"
+                      ? "8M"
                       : user.subscription.plan === "silver"
                       ? "300K"
                       : "2K"}{" "}

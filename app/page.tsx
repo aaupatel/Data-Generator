@@ -70,7 +70,7 @@ export default function Home() {
 
     const maxRecords =
       user?.subscription.plan === "gold"
-        ? 10000000
+        ? 9000000
         : user?.subscription.plan === "silver"
         ? 300000
         : 2000;

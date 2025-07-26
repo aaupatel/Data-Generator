@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar"
 export default function HelpPage() {
   return (
     <div className="max-w-7xl mx-auto p-4 space-y-6">
-      <Navbar/>
+      <Navbar />
       <div className="container mx-auto px-4">
         <h1 className="text-4xl font-bold mb-8">Help Center</h1>
 
@@ -39,7 +39,7 @@ export default function HelpPage() {
 
               <div className="bg-white p-6 rounded-lg shadow">
                 <h3 className="text-lg font-medium mb-2">
-                  Silver Plan ($40/year)
+                  Silver Plan (₹3000/year)
                 </h3>
                 <ul className="list-disc list-inside">
                   <li>Up to 300,000 rows per file</li>
@@ -51,10 +51,10 @@ export default function HelpPage() {
 
               <div className="bg-white p-6 rounded-lg shadow">
                 <h3 className="text-lg font-medium mb-2">
-                  Gold Plan ($300/year)
+                  Gold Plan (₹9000/year)
                 </h3>
                 <ul className="list-disc list-inside">
-                  <li>Up to 10M rows per file</li>
+                  <li>Up to 8M rows per file</li>
                   <li>All features included</li>
                   <li>Priority support</li>
                   <li>Unlimited daily records</li>
