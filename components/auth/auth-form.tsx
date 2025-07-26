@@ -13,31 +13,20 @@ import { GithubLogo } from "../ui/github-icon";
 import { toast } from "sonner";
 import { signIn } from "next-auth/react";
 
+// Unified schema with optional `name`
+const formSchema = z.object({
+  name: z.string().min(2, { message: "Name must be at least 2 characters." }).max(50).optional(),
+  email: z.string().email({ message: "Invalid email address." }),
+  password: z.string().min(6, { message: "Password must be at least 6 characters." }),
+});
+
+type AuthFormSchema = z.infer<typeof formSchema>;
+
 export function AuthForm({ type }: { type: "login" | "register" }) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const formSchema =
-    type === "register"
-      ? z.object({
-          name: z
-            .string()
-            .min(2, { message: "Name must be at least 2 characters." })
-            .max(50)
-            .optional(),
-          email: z.string().email({ message: "Invalid email address." }),
-          password: z
-            .string()
-            .min(6, { message: "Password must be at least 6 characters." }),
-        })
-      : z.object({
-          email: z.string().email({ message: "Invalid email address." }),
-          password: z
-            .string()
-            .min(6, { message: "Password must be at least 6 characters." }),
-        });
-
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<AuthFormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
@@ -46,7 +35,7 @@ export function AuthForm({ type }: { type: "login" | "register" }) {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: AuthFormSchema) => {
     setIsLoading(true);
 
     try {
@@ -67,7 +56,6 @@ export function AuthForm({ type }: { type: "login" | "register" }) {
       const data = await res.json();
 
       if (!res.ok) {
-        // toast.error(data.error || "Something went wrong. Please try again.");
         throw new Error(data.error || "Something went wrong.");
       }
 
@@ -80,8 +68,8 @@ export function AuthForm({ type }: { type: "login" | "register" }) {
         router.refresh();
       }
     } catch (error: any) {
-       console.error(error);
-       toast.error(error.message || "An unexpected error occurred.");
+      console.error(error);
+      toast.error(error.message || "An unexpected error occurred.");
     } finally {
       setIsLoading(false);
     }
