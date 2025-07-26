@@ -130,7 +130,7 @@ function generateHypothesis(): string {
   ];
 
   return faker.helpers.arrayElement(hypotheses)
-    .replace("[treatment]", faker.science.chemicalElement())
+    .replace("[treatment]", faker.science.chemicalElement().name)
     .replace("[outcome]", "observed results")
     .replace("[variable1]", "independent variable")
     .replace("[variable2]", "dependent variable")

@@ -45,7 +45,8 @@ export type Language =
   | "ja" 
   | "ko" 
   | "zh_CN" 
-  | "ar";
+  | "ar"
+  | "gb";
 
 export interface Field {
   id: string;
