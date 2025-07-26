@@ -10,7 +10,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useState } from "react";
 import * as Icons from "lucide-react";
 import { CustomFieldDialog } from "./CustomFieldDialog";
-import { Button } from "@/components/ui/button";
 import { X, Pencil } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 

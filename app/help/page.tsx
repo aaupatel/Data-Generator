@@ -19,7 +19,7 @@ export default function HelpPage() {
                   <li>Select your desired fields from the Field Selector</li>
                   <li>Configure the number of records and other options</li>
                   <li>Choose your preferred output format</li>
-                  <li>Click "Generate Data" to create your dataset</li>
+                  <li>Click &quot;Generate Data&quot; to create your dataset</li>
                 </ol>
               </div>
             </div>
@@ -83,7 +83,7 @@ export default function HelpPage() {
                       Q: What happens after I use all my free trials?
                     </p>
                     <p>
-                      A: You'll need to create an account to continue using the
+                      A: You&apos;ll need to create an account to continue using the
                       service.
                     </p>
                   </div>

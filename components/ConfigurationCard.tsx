@@ -120,7 +120,7 @@ export function ConfigurationCard({
           </div>
 
           <div>
-            <label className="text-sm font-medium text-slate-700 mb-1.5 block flex items-center gap-2">
+            <label className="text-sm font-medium text-slate-700 mb-1.5 md:block flex items-center gap-2">
               <Globe2 className="h-4 w-4" />
               Language
             </label>
