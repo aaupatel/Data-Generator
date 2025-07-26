@@ -1,8 +1,9 @@
+import { User } from "lucide-react";
 import { FieldCategory } from "../types";
 
 export const personalInformation: FieldCategory = {
   name: "Personal Information",
-  icon: "User",
+  icon: User,
   fields: [
     { id: "prefix", label: "Prefix", type: "string", example: "Mr., Mrs., Dr." },
     { id: "firstName", label: "First Name", type: "string", example: "John" },
