@@ -62,7 +62,7 @@ export interface CustomField extends Field {
 
 export interface FieldCategory {
   name: string;
-  icon: LucideIcon;
+  icon: string;
   fields: Field[];
   customFields?: CustomField[];
 }
