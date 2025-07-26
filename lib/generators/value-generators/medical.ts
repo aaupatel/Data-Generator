@@ -1,6 +1,7 @@
 import { Language } from "../../types";
 import { getFaker } from "../../faker/instances";
 import { generateFullName } from "./name";
+import { faker } from "@faker-js/faker";
 
 const BLOOD_TYPES = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
 

@@ -1,6 +1,7 @@
 import { Language } from "../../types";
 import { getFaker } from "../../faker/instances";
 import { generateFullName } from "./name";
+import { faker } from "@faker-js/faker";
 
 const RESEARCH_FIELDS = [
   { field: "Computer Science", topics: ["Machine Learning", "Computer Vision", "Natural Language Processing", "Cybersecurity", "Distributed Systems"] },

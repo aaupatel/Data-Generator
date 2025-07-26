@@ -1,5 +1,6 @@
 import { Language } from "../../types";
 import { getFaker } from "../../faker/instances";
+import { faker } from "@faker-js/faker";
 
 const SCIENTIFIC_FIELDS = [
   {

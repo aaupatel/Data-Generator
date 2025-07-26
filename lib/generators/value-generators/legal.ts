@@ -1,6 +1,7 @@
 import { Language } from "../../types";
 import { getFaker } from "../../faker/instances";
 import { generateFullName } from "./name";
+import { faker } from "@faker-js/faker";
 
 const CASE_TYPES = [
   { type: "Civil", subtypes: ["Contract Dispute", "Property Damage", "Personal Injury", "Employment"] },
