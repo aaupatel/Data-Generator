@@ -33,7 +33,7 @@
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/<your-username>/data-generator.git
+git clone https://github.com/aaupatel/Data-Generator.git
 cd data-generator
 ```
 
