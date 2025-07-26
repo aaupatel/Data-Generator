@@ -156,7 +156,9 @@ export function FieldSelector({ categories, selectedFields, onFieldChange }: Fie
               className="space-y-2"
             >
               {filteredCategories.map((category) => {
-                const Icon = Icons[category.icon as keyof typeof Icons];
+                const Icon = Icons[
+                  category.icon as keyof typeof Icons
+                ] as React.ElementType;
                 const categoryCustomFields = getCustomFieldsForCategory(category.name);
                 const allFields = [...category.fields, ...categoryCustomFields];
                 
