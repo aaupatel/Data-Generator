@@ -1,3 +1,5 @@
+import { LucideIcon } from "lucide-react";
+
 export type DatabaseType = "mysql" | "postgresql" | "oracle" | "mongodb" | "sqlserver" | "elasticsearch";
 export type OutputFormat = DatabaseType | "csv" | "excel" | "text" | "json";
 export type DataType = 
@@ -60,7 +62,7 @@ export interface CustomField extends Field {
 
 export interface FieldCategory {
   name: string;
-  icon: string;
+  icon: LucideIcon;
   fields: Field[];
   customFields?: CustomField[];
 }
