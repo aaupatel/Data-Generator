@@ -1,0 +1,22 @@
+export const SAMPLE_DATA: Record<string, string[]> = {
+  prefix: ["Mr.", "Mrs.", "Ms.", "Dr.", "Prof."],
+  firstName: ["James", "Mary", "John", "Patricia", "Robert", "Jennifer", "Michael", "Linda", "William", "Elizabeth", "David", "Barbara", "Richard", "Susan", "Joseph", "Jessica", "Thomas", "Sarah", "Christopher", "Karen"],
+  lastName: ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez", "Hernandez", "Lopez", "Gonzalez", "Wilson", "Anderson", "Thomas", "Taylor", "Moore", "Jackson", "Martin"],
+  email: ["john.doe@example.com", "jane.smith@example.com", "robert.johnson@example.com", "mary.williams@example.com"],
+  phoneNumber: ["+1-555-0123", "+1-555-0124", "+1-555-0125", "+1-555-0126", "+1-555-0127"],
+  city: ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia", "San Antonio", "San Diego", "Dallas", "San Jose"],
+  state: ["NY", "CA", "IL", "TX", "AZ", "PA", "FL", "OH", "MI", "GA"],
+  country: ["USA", "Canada", "UK", "Australia", "Germany", "France", "Japan", "Brazil", "Spain", "Italy"],
+  company: ["Acme Corp", "Globex", "Initech", "Umbrella Corp", "Stark Industries", "Wayne Enterprises", "Cyberdyne Systems", "Oscorp"],
+  jobTitle: ["Software Engineer", "Product Manager", "Data Analyst", "Marketing Manager", "Sales Representative", "Project Manager", "Business Analyst", "UX Designer"],
+  department: ["Engineering", "Marketing", "Sales", "Finance", "Human Resources", "Operations", "Research", "Legal"],
+  gender: ["Male", "Female", "Non-binary", "Prefer not to say"],
+  bloodType: ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"],
+  vehicleMake: ["Toyota", "Honda", "Ford", "BMW", "Mercedes", "Audi", "Tesla", "Chevrolet"],
+  vehicleModel: ["Camry", "Civic", "F-150", "Model 3", "C-Class", "A4", "X5", "Silverado"],
+  university: ["Harvard", "MIT", "Stanford", "Yale", "Princeton", "Columbia", "Berkeley", "Oxford"],
+  degree: ["Bachelor of Science", "Master of Arts", "PhD", "Bachelor of Arts", "Master of Science", "MBA"],
+  major: ["Computer Science", "Business Administration", "Engineering", "Psychology", "Economics", "Mathematics"],
+  propertyType: ["Single Family Home", "Apartment", "Condo", "Townhouse", "Duplex", "Villa", "Penthouse"],
+  airline: ["United Airlines", "American Airlines", "Delta", "British Airways", "Lufthansa", "Emirates", "Air France"]
+};
