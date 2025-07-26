@@ -24,7 +24,7 @@ export const REALISTIC_REPLACEMENTS: Record<string, string[] | ((faker: Faker) =
   // Medical Information
   bloodType: ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"],
   visionScore: ["20/20", "20/25", "20/30", "20/40", "20/50", "20/60"],
-  condition: [
+  medicalCondition: [
     "Hypertension", "Type 2 Diabetes", "Asthma", "Arthritis",
     "Migraine", "Anxiety", "Depression", "Hypothyroidism"
   ],
@@ -59,7 +59,7 @@ export const REALISTIC_REPLACEMENTS: Record<string, string[] | ((faker: Faker) =
     "Electronics", "Clothing", "Home & Garden", "Books",
     "Sports & Outdoors", "Beauty & Health", "Toys & Games"
   ],
-  condition: [
+  productCondition: [
     "New", "Like New", "Very Good", "Good", "Acceptable", "Refurbished"
   ],
 
