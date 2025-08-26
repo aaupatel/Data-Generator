@@ -42,7 +42,7 @@ export async function POST(request: Request) {
         }
 
         const token = generateToken({ id: user._id.toString(), email: user.email });
-        const cookieStore = cookies();
+        const cookieStore = await cookies();
 
         cookieStore.set('auth-token', token, {
             httpOnly: true,

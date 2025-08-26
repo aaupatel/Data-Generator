@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Loader2, CheckCircle2, XCircle } from "lucide-react";
 
-export default function VerifyEmail() {
+function VerifyEmailComponent() {
   const [verificationStatus, setVerificationStatus] = useState<
     "loading" | "success" | "error"
   >("loading");
@@ -57,8 +57,8 @@ export default function VerifyEmail() {
               <CheckCircle2 className="h-12 w-12 text-green-500" />
               <h2 className="text-2xl font-semibold">Email Verified!</h2>
               <p className="text-gray-500 text-center">
-                Your email has been successfully verified. You can now log In
-                to your account.
+                Your email has been successfully verified. You can now log In to
+                your account.
               </p>
               <Button
                 onClick={() => router.push("/auth/login")}
@@ -88,5 +88,13 @@ export default function VerifyEmail() {
         </div>
       </Card>
     </div>
+  );
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VerifyEmailComponent />
+    </Suspense>
   );
 }

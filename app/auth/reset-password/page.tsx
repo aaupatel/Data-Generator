@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -12,7 +12,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 const formSchema = z
   .object({
-    password: z.string().min(6),
+    password: z.string().min(6, "Password must be at least 6 characters."),
     confirmPassword: z.string().min(6),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -20,7 +20,7 @@ const formSchema = z
     path: ["confirmPassword"],
   });
 
-export default function ResetPassword() {
+function ResetPasswordForm() {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
@@ -39,7 +39,7 @@ export default function ResetPassword() {
     if (!token) {
       toast({
         title: "Error",
-        description: "Invalid reset token",
+        description: "Invalid or missing reset token.",
         variant: "destructive",
       });
       return;
@@ -57,17 +57,20 @@ export default function ResetPassword() {
         }),
       });
 
-      if (!res.ok) throw new Error(await res.text());
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "An unknown error occurred.");
+      }
 
       toast({
-        title: "Success",
+        title: "Success!",
         description: "Your password has been reset successfully.",
       });
 
       router.push("/auth/login");
     } catch (error: any) {
       toast({
-        title: "Error",
+        title: "Reset Failed",
         description: error.message,
         variant: "destructive",
       });
@@ -94,12 +97,22 @@ export default function ResetPassword() {
             placeholder="New Password"
             disabled={isLoading}
           />
+          {form.formState.errors.password && (
+            <p className="text-sm text-destructive">
+              {form.formState.errors.password.message}
+            </p>
+          )}
           <Input
             {...form.register("confirmPassword")}
             type="password"
             placeholder="Confirm Password"
             disabled={isLoading}
           />
+          {form.formState.errors.confirmPassword && (
+            <p className="text-sm text-destructive">
+              {form.formState.errors.confirmPassword.message}
+            </p>
+          )}
           <Button disabled={isLoading} type="submit" className="w-full">
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
             Reset Password
@@ -107,5 +120,13 @@ export default function ResetPassword() {
         </form>
       </div>
     </div>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResetPasswordForm />
+    </Suspense>
   );
 }

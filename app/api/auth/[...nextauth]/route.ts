@@ -2,8 +2,23 @@ import NextAuth from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import { connectToDatabase } from '@/lib/mongodb';
-import { sign } from 'jsonwebtoken';
-import { cookies } from 'next/headers';
+import { Awaitable, User, Account } from 'next-auth';
+declare module 'next-auth' {
+  interface Session {
+    user: {
+      id: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+    };
+  }
+}
+
+declare module 'next-auth/jwt' {
+  interface JWT {
+    id: string;
+  }
+}
 
 const handler = NextAuth({
   providers: [
@@ -17,16 +32,15 @@ const handler = NextAuth({
     }),
   ],
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user, account }: { user: User; account: Account | null }): Promise<boolean> {
       if (!user.email) return false;
 
       try {
         const { db } = await connectToDatabase();
         const existingUser = await db.collection('users').findOne({ email: user.email });
 
-        let userId;
         if (!existingUser) {
-          const newUser = await db.collection('users').insertOne({
+          const result = await db.collection('users').insertOne({
             name: user.name,
             email: user.email,
             provider: account?.provider,
@@ -35,45 +49,36 @@ const handler = NextAuth({
             subscription: {
               plan: 'free',
               status: 'active',
-              expiresAt: new Date(new Date().setMonth(new Date().getMonth() + 6)), // Free expires in 6 months
+              expiresAt: new Date(new Date().setMonth(new Date().getMonth() + 6)),
             },
           });
-          userId = newUser.insertedId.toString(); // Use the newly created user's _id
+          // Attach the new database user ID to the user object
+          user.id = result.insertedId.toString();
         } else {
-          userId = existingUser._id.toString(); // Use the existing user's _id
+          // Attach the existing database user ID to the user object
+          user.id = existingUser._id.toString();
         }
 
-        const token = sign(
-          { id: userId, email: user.email },
-          process.env.JWT_SECRET!,
-          { expiresIn: '7d' }
-        );
-
-        const cookieStore = cookies();
-        cookieStore.set('auth-token', token, {
-          httpOnly: true,
-          path: '/',
-          secure: process.env.NODE_ENV === 'production',
-          sameSite: 'lax',
-          maxAge: 60 * 60 * 24 * 7, // 7 days
-        });
-
-        return true;
+        return true; // Allow the sign-in
       } catch (error) {
         console.error('Sign in error:', error);
-        return false;
+        return false; // Prevent sign-in on error
       }
     },
-    async jwt({ token, user, account }) {
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.provider = account?.provider;
       }
       return token;
     },
+    async session({ session, token }) {
+      // The token's `id` property comes from the `jwt` callback
+      session.user.id = token.id;
+      return session;
+    },
 
     async redirect({ url, baseUrl }) {
-      // Redirect to `/` after successful login
+      // Redirect to the home page after successful login
       return baseUrl;
     },
   },
