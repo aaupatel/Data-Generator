@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { toast } from "sonner";
+import { signOut } from "next-auth/react";
 
 type UserType = {
   name: string;
@@ -46,6 +47,7 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     try {
+      await signOut({ redirect: false });
       const res = await fetch("/api/auth/logout", { method: "POST" });
       if (res.ok) {
         toast.success("Logged out successfully");
@@ -58,7 +60,7 @@ export default function Navbar() {
       } else {
         throw new Error("Logout failed.");
       }
-    } catch (error:any) {
+    } catch (error: any) {
       console.error(error);
       toast.error(error.message || "An unexpected error occurred.");
     }

@@ -2,7 +2,7 @@ import NextAuth from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import { connectToDatabase } from '@/lib/mongodb';
-import { Awaitable, User, Account } from 'next-auth';
+import { User, Account } from 'next-auth';
 declare module 'next-auth' {
   interface Session {
     user: {

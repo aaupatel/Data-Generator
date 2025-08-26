@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import { compare } from 'bcrypt';
 import { connectToDatabase } from '@/lib/mongodb';
 import { generateToken } from '@/lib/jwt';
-import { cookies } from 'next/headers';
 
 export async function POST(request: Request) {
     try {
@@ -18,7 +17,7 @@ export async function POST(request: Request) {
         const { db } = await connectToDatabase();
         const user = await db.collection('users').findOne({ email });
 
-        if (!user) {
+        if (!user || !user.password) {
             return NextResponse.json(
                 { error: 'Invalid credentials.' },
                 { status: 401 }
@@ -42,17 +41,8 @@ export async function POST(request: Request) {
         }
 
         const token = generateToken({ id: user._id.toString(), email: user.email });
-        const cookieStore = await cookies();
 
-        cookieStore.set('auth-token', token, {
-            httpOnly: true,
-            path: '/',
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'lax',
-            maxAge: 60 * 60 * 24 * 7 // 7 days
-        });
-
-        return NextResponse.json({
+        const response = NextResponse.json({
             message: 'Login successful.',
             user: {
                 id: user._id,
@@ -61,6 +51,16 @@ export async function POST(request: Request) {
                 subscription: user.subscription
             }
         });
+
+        response.cookies.set('auth-token', token, {
+            httpOnly: true,
+            path: '/',
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'lax',
+            maxAge: 60 * 60 * 24 * 7 // 7 days
+        });
+
+        return response;
     } catch (error) {
         console.error('Login error:', error);
         return NextResponse.json(
