@@ -8,9 +8,9 @@ import AuthProvider from "@/components/providers/next-auth-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Database Data Generator",
+  title: "Data Generator",
   description:
-    "Generate sample data for MySQL, PostgreSQL, Oracle, MongoDB, CSV, and Excel formats",
+    "Generate sample data for MySQL, PostgreSQL, Oracle, MongoDB, CSV, JSON and Excel formats",
 };
 
 export default function RootLayout({

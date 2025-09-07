@@ -5,8 +5,9 @@ import { generateRandomValue } from "../generators/shared";
 const CHUNK_SIZE = 1000;
 
 self.onmessage = (e: MessageEvent) => {
-  const { type, count, uniqueData, nullData, fields, language, textSeparator } = e.data;
-  
+  const { type, count, uniqueData, nullData, fields, language, textSeparator } =
+    e.data;
+
   try {
     const totalChunks = Math.ceil(count / CHUNK_SIZE);
     const usedValues: Set<number> = new Set<number>();
@@ -14,7 +15,7 @@ self.onmessage = (e: MessageEvent) => {
     let processedCount = 0;
 
     for (let chunk = 0; chunk < totalChunks; chunk++) {
-      const chunkSize = Math.min(CHUNK_SIZE, count - (chunk * CHUNK_SIZE));
+      const chunkSize = Math.min(CHUNK_SIZE, count - chunk * CHUNK_SIZE);
       const chunkData = generateChunk(
         type,
         chunkSize,
@@ -28,17 +29,17 @@ self.onmessage = (e: MessageEvent) => {
       );
 
       processedCount += chunkSize;
-      
+
       // Report progress and chunk data
       self.postMessage({
-        type: 'progress',
+        type: "progress",
         data: chunkData,
         progress: (processedCount / count) * 100,
-        isLastChunk: processedCount >= count
+        isLastChunk: processedCount >= count,
       });
     }
-  } catch (error:any) {
-    self.postMessage({ type: 'error', error: error.message });
+  } catch (error: any) {
+    self.postMessage({ type: "error", error: error.message });
   }
 };
 
@@ -56,14 +57,23 @@ function generateChunk(
   const results: string[] = [];
 
   for (let i = 0; i < chunkSize; i++) {
-    const id = uniqueData ? offset + i + 1 : Math.floor(Math.random() * (offset + chunkSize)) + 1;
+    const id = uniqueData
+      ? offset + i + 1
+      : Math.floor(Math.random() * (offset + chunkSize)) + 1;
 
     if (uniqueData && usedValues.has(id)) {
       continue;
     }
     usedValues.add(id);
 
-    const record = generateRecord(type, id, fields, nullData, language, textSeparator);
+    const record = generateRecord(
+      type,
+      id,
+      fields,
+      nullData,
+      language,
+      textSeparator
+    );
     results.push(record);
   }
 
@@ -79,32 +89,40 @@ function generateRecord(
   textSeparator: string
 ): string {
   const values: Record<string, any> = { id };
-  
-  fields.forEach(field => {
-    const columnName = field.isCustom && field.label ? field.label : field.fieldName;
-    values[columnName] = generateRandomValue(field.fieldName, nullData, language);
+
+  fields.forEach((field) => {
+    const columnName =
+      field.isCustom && field.label ? field.label : field.fieldName;
+    values[columnName] = generateRandomValue(
+      field.fieldName,
+      nullData,
+      language
+    );
   });
 
   switch (type) {
-    case 'mysql':
-    case 'postgresql':
-    case 'oracle':
-    case 'sqlserver':
+    case "mysql":
+    case "postgresql":
+    case "oracle":
+    case "sqlserver":
       return generateSQLRecord(type, values);
-    case 'mongodb':
+    case "mongodb":
       return generateMongoRecord(values);
-    case 'elasticsearch':
+    case "elasticsearch":
       return generateElasticsearchRecord(values);
     default:
       return JSON.stringify(values);
   }
 }
 
-function generateSQLRecord(type: DatabaseType, values: Record<string, any>): string {
-  const fields = Object.keys(values).join(', ');
+function generateSQLRecord(
+  type: DatabaseType,
+  values: Record<string, any>
+): string {
+  const fields = Object.keys(values).join(", ");
   const valuesList = Object.values(values)
-    .map(v => v === null ? 'NULL' : `'${v}'`)
-    .join(', ');
+    .map((v) => (v === null ? "NULL" : `'${v}'`))
+    .join(", ");
   return `INSERT INTO users (${fields}) VALUES (${valuesList});`;
 }
 
@@ -113,6 +131,6 @@ function generateMongoRecord(values: Record<string, any>): string {
 }
 
 function generateElasticsearchRecord(values: Record<string, any>): string {
-  const action = { index: { _index: 'users', _id: values.id } };
+  const action = { index: { _index: "users", _id: values.id } };
   return `${JSON.stringify(action)}\n${JSON.stringify(values)}`;
 }

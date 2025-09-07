@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -15,6 +16,7 @@ const formSchema = z.object({
 
 export default function ForgotPassword() {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -52,7 +54,7 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="container flex h-screen w-screen flex-col items-center justify-center">
+    <div className="flex h-screen w-screen flex-col items-center justify-center px-6">
       <div className="space-y-6 w-full sm:w-[350px]">
         <div className="space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">
@@ -74,6 +76,13 @@ export default function ForgotPassword() {
             Send Reset Link
           </Button>
         </form>
+        <Button
+          variant="ghost"
+          className="w-full"
+          onClick={() => router.push("/auth/login")}
+        >
+          Back
+        </Button>
       </div>
     </div>
   );

@@ -1,5 +1,9 @@
 {
-  "name": "Ayush Patidar",
+  "name": "data-generator",
+  "author": {
+    "name": "Ayush Patidar",
+    "email": "ayushpatidar2810@gmail.com"
+  },
   "version": "0.1.0",
   "private": true,
   "scripts": {

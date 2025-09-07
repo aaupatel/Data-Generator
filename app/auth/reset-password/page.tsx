@@ -80,7 +80,7 @@ function ResetPasswordForm() {
   };
 
   return (
-    <div className="container flex h-screen w-screen flex-col items-center justify-center">
+    <div className="flex h-screen w-screen flex-col items-center justify-center px-6">
       <div className="space-y-6 w-full sm:w-[350px]">
         <div className="space-y-2 text-center">
           <h1 className="text-2xl font-semibold tracking-tight">

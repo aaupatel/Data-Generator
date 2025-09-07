@@ -143,7 +143,14 @@ export default function SubscriptionPage() {
         <Login />
       ) : (
         <div className="space-y-6">
-          <h2 className="text-2xl font-bold">Subscription Plans</h2>
+          <div>
+            <h2 className="text-2xl font-bold tracking-tight">
+              Subscription Plans
+            </h2>
+            <p className="text-muted-foreground">
+              Choose the plan that best fits your needs
+            </p>
+          </div>
           <div className="grid gap-6 lg:grid-cols-3">
             {plans.map((plan) => (
               <Card
@@ -165,6 +172,7 @@ export default function SubscriptionPage() {
                     ))}
                   </ul>
                   <Button
+                    className="w-full"
                     onClick={() => handleSubscription(plan.name)}
                     disabled={loading}
                   >

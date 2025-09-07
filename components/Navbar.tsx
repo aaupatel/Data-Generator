@@ -92,11 +92,11 @@ export default function Navbar() {
         <div className="flex flex-col">
           <div className="flex items-center gap-2 text-xs md:text-sm text-blue-700 font-medium">
             <Database className="h-3.5 w-3.5" aria-label="Database Icon" />
-            <span>Enterprise Data Generator</span>
+            <span>Data Generator</span>
             <Sparkles className="h-3.5 w-3.5" aria-label="Sparkles Icon" />
           </div>
           <h1 className="text-xs md:text-lg font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
-            Database Data Generator
+            Data Generator
           </h1>
         </div>
       </div>
